@@ -68,8 +68,8 @@ console.log(defUpperStr()); // DEFAULT TEXT
  * evenFn(20) → [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
  */
  function evenFn(n){
-    let arr = [];
-    for (let i = 1; i <= n; i++) if (i % 2 === 0) arr.push(i);
+    var arr = [];
+    for (var i = 1; i <= n; i++) if (i % 2 === 0) arr.push(i);
     return arr;
 };
 console.log(evenFn(10)); // [2, 4, 6, 8, 10]
@@ -93,22 +93,36 @@ console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
  * В реализации функции обязательно должны быть использованы операторы switch / case / default.
  */
 
-function weekFn(week){
-    var weekName = '',
+function weekFn(days) {
+    var a = '';
+    switch (days) {
+    case 1:
+    a = 'Понедельник';
+    break;
+    case 2:
+    a = 'Вторник';
+    break;
+    case 3:
+    a = 'Среда';
+    break;
+    case 4:
+    a = 'Четверг';
+    break;
+    case 5:
+    a = 'Пятница';
+    break;
+    case 6:
+    a = 'Суббота';
+    break;
+    case 7:
+    a= 'Воскресенье';
+    break;
+    default:
+    a = null;
+    }
+    return a;
+    }
 
-switch (week) {
-case 1:weekName = 'Понедельник'; break;
-case 2:weekName ='Вторник'; break;
-case 3:weekName = 'Cреда'; break;
-case 4:weekName ='Четверг'; break;
-case 5:weekName = 'Пятница'; break;
-case 6:weekName ='Суббота'; break;
-case 7:weekName = 'Воскресенье'; break;
-default:
-      weekName = null;
-}
-return weekName;
-}
 console.log(weekFn(1)); // 'Понедельник'
 
 console.log(weekFn(3)); // 'Среда'
@@ -138,22 +152,25 @@ console.log(weekFn('2')); // null
  * При выполнении задания допускается использовать только тернарный оператор ?.
  * Использование операторов if, switch – запрещено.
  */
+function ageClassification(ageN) {
+    return ageN > 0 ? ageN > 24? ageN > 44 ? ageN > 65 ? ageN > 75 ? ageN > 90 ? ageN > 122 ? null : 'долгожители' : 'старческий возраст' : 'пожилой возраст' : 'средний возраст' : 'молодой возраст' : 'детский возраст' : null;
+    }
 
-// console.log('-1 :', ageClassification(-1)); // -1 : null
+console.log('-1 :', ageClassification(-1)); // -1 : null
 
-// console.log('5 :', ageClassification(5)); // 5 : детский возраст
+console.log('5 :', ageClassification(5)); // 5 : детский возраст
 
-// console.log('34 :', ageClassification(34)); // 34 : молодой возраст
+console.log('34 :', ageClassification(34)); // 34 : молодой возраст
 
-// console.log('50 :', ageClassification(50)); // 50 : средний возраст
+console.log('50 :', ageClassification(50)); // 50 : средний возраст
 
-// console.log('65.1 :', ageClassification(65.1)); // 65.1 : пожилой возраст
+console.log('65.1 :', ageClassification(65.1)); // 65.1 : пожилой возраст
 
-// console.log('80 :', ageClassification(80)); // 80 : старческий возраст
+console.log('80 :', ageClassification(80)); // 80 : старческий возраст
 
-// console.log('110 :', ageClassification(110)); // 110 : долгожители
+console.log('110 :', ageClassification(110)); // 110 : долгожители
 
-// console.log('130 :', ageClassification(130)); // 130 : null
+console.log('130 :', ageClassification(130)); // 130 : null
 
 /*
  * Блок тестирования:
@@ -190,12 +207,17 @@ console.log(weekFn('2')); // null
  * oddFn(15) → [1, 3, 5, 7, 9, 11, 13, 15]
  * oddFn(20) → [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
  */
+function oddFn(n) {
+    var array = [];
+    var i = 0;
+    while (i++ < n) if (i % 2 !== 0) array.push(i);
+    return array;
+    }
+console.log(oddFn(10)); // [1, 3, 5, 7, 9]
 
-// console.log(oddFn(10)); // [1, 3, 5, 7, 9]
+console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
 
-// console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
-
-// console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
 
 /*
  * #8
@@ -208,7 +230,10 @@ console.log(weekFn('2')); // null
  * Реализуйте проверку: если третьим параметром передается не функция, нужно вернуть false.
  *
  */
-
+function mainFunc(a, b, func){
+        if (func && typeof func === 'function') return func(a, b);
+        return false;
+        }
 /*
  * реализуйте следующие функции, которые будут осуществлять механизм callback в основной функции,
  * возвращая ей результат собственного вычисления...
@@ -230,10 +255,22 @@ console.log(weekFn('2')); // null
  * mainFunc(2, 5, 'not a func') → false
  */
 
-// console.log(mainFunc(2, 5, cbRandom)); // целые числа в диапазоне 2..5
+    function cbRandom(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
-// console.log(mainFunc(2, 5, cbPow)); // 32
+    function cbPow(num, pow) {
+    return Math.pow(num, pow);
+    }
 
-// console.log(mainFunc(2, 5, cbAdd)); // 7
+    function cbAdd(a, b) {
+    return a + b;
+    }
 
-// console.log(mainFunc(2, 5, 'not a func')); // false
+console.log(mainFunc(2, 5, cbRandom)); // целые числа в диапазоне 2..5
+
+console.log(mainFunc(2, 5, cbPow)); // 32
+
+console.log(mainFunc(2, 5, cbAdd)); // 7
+
+console.log(mainFunc(2, 5, 'not a func')); // false
